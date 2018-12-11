@@ -1,33 +1,33 @@
 package Events;
 
 import Filters.EventFilter;
-import Items.Offer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ListenerData {
     private EventListener listener;
-    private ArrayList<EventFilter> filters;
+    private EventFilter filter;
 
     public ListenerData(EventListener listener) {
         this.listener = listener;
-        this.filters = new ArrayList<EventFilter>();
     }
 
-    public ArrayList<Offer> addFilter() {
-        // TODO: 11-Dec-18
-        return null;
+    public void addFilter(EventFilter filter) {
+        this.filter = filter;
     }
 
     public EventListener getListener() {
         return listener;
     }
 
-    public ArrayList<EventFilter> getFilters() {
-        return (ArrayList<EventFilter>) filters;
+    public EventFilter getFilter() {
+        return filter;
     }
 
+    public boolean applyFilter(Event e) {
+        return filter.applyFilter(e);
+    }
+
+
+    @Override
     public boolean equals(Object object) {
         if(object instanceof ListenerData) {
             EventListener eventListener = (EventListener) object;

@@ -2,6 +2,7 @@ package Events;
 
 
 import Filters.EventFilter;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -24,20 +25,31 @@ public class EventDispatcher {
         eventListenerManager.register(type, data);
     }
 
-    public void publishEvent() {
-
+    public void publishEvent(Event event) {
+        if(event != null) {
+            eventsQueue.add(event);
+        }
     }
 
     private void dispatch(ListenerData listenerData, Event event){
         EventListener listener = listenerData.getListener();
-        //manage filters, apply filter on offer
-
+        //manage filters, apply filter on event
+        if(listenerData.applyFilter(event)) {
+            listener.handleEvent(event);
+        }
     }
 
-
-
     private void dispatchLoop() {
-
+        while(!Thread.currentThread().isInterrupted()){
+            try{
+                final Event event = eventsQueue.take();
+                eventListenerManager.getListenersForEvent(event.getType())
+                        .forEach(listenerData -> dispatch(listenerData, event));
+            }catch(InterruptedException e){
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
     }
 
 }

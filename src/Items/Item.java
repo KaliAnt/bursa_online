@@ -46,10 +46,24 @@ public abstract class Item {
     public int getAmount() {
         return amount;
     }
+    public Date getDate(){ return date; }
 
     public void modify(Date date, int amount, int price) {
         modifyDate(date);
         setAmount(amount);
         setPrice(price);
+    }
+
+    public boolean isEqual(Object obj) {
+        if(obj instanceof Item) {
+            Item item = (Item) obj;
+            if(item.getAmount() == getAmount() &&
+                    item.getPrice() == getPrice() &&
+                    item.getDate().equals(getDate()) &&
+                    item.getShareType() == getShareType()
+            )
+                return true;
+        }
+        return false;
     }
 }

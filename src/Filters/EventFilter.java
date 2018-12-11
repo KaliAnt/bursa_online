@@ -1,13 +1,14 @@
 package Filters;
 
+import Events.Event;
+
 public abstract class EventFilter {
     private final FilterType filterType;
-    Object object;
 
-    public EventFilter(FilterType filterType, Object object) {
+    public EventFilter(FilterType filterType) {
         this.filterType = filterType;
-
-        this.object = object;
     }
+
+    public abstract boolean applyFilter(Event event);
 
 }

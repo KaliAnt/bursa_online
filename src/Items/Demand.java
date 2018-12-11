@@ -13,4 +13,13 @@ public class Demand extends Item {
     public Buyer getBuyer() {
         return buyer;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Demand) {
+            Demand demand = (Demand) obj;
+            if(demand.getBuyer().getId() == buyer.getId())
+                return super.isEqual(obj);
+        }
+        return false;
+    }
 }

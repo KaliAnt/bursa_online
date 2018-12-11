@@ -1,8 +1,8 @@
 package Events;
 
 public enum EventType {
-    OFFER_APPEARED,
-    OFFER_CHANGED,
-    OFFER_DELETED,
-    OFFER_READ
+    ITEM_APPEARED,
+    ITEM_CHANGED,
+    ITEM_DELETED,
+    ITEM_READ
 }

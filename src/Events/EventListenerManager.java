@@ -1,6 +1,9 @@
 package Events;
 
+import Filters.EventFilter;
+
 import java.util.*;
+import java.util.stream.Stream;
 
 public class EventListenerManager {
     private final Object mutex = new Object();
@@ -17,10 +20,14 @@ public class EventListenerManager {
             if(mapContainsListener(eventType, listenerData)) {
                 listenerMap.computeIfPresent(eventType, (type, list) -> {
                    list.remove(listenerData);
-                   return list.isEmpty()?null:list;
+                   return list.isEmpty()? null : list;
                 });
             }
         }
+    }
+
+    public Stream<ListenerData> getListenersForEvent(EventType type) {
+        return listenerMap.getOrDefault(type, Collections.emptyList()).stream();
     }
 
     private boolean mapContainsListener(EventType type, ListenerData listener){

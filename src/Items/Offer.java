@@ -16,4 +16,14 @@ public class Offer extends Item{
     public Seller getSeller(){
         return seller;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Offer) {
+            Offer offer = (Offer) obj;
+            if(offer.getSeller().getId() == seller.getId())
+                return super.isEqual(obj);
+        }
+        return false;
+    }
 }

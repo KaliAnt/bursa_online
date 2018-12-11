@@ -4,5 +4,5 @@ public enum FilterType {
     PRICE,
     DATE,
     READ,
-    MIN_PRICE
+    ITEM_FILTER
 }

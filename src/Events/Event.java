@@ -14,13 +14,13 @@ public class Event {
 
     public String getEventType() {
         switch(type) {
-            case OFFER_READ:
+            case ITEM_READ:
                 return "An offer was read";
-            case OFFER_CHANGED:
+            case ITEM_CHANGED:
                 return "An offer was changed";
-            case OFFER_DELETED:
+            case ITEM_DELETED:
                 return "An offer is not available anymore";
-            case OFFER_APPEARED:
+            case ITEM_APPEARED:
                 return "An offer has appeared";
             default:
                 return "Error";
@@ -31,5 +31,5 @@ public class Event {
     {
         return item;
     }
-
+    public EventType getType() { return type; }
 }
