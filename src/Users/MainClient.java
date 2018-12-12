@@ -43,8 +43,8 @@ public class MainClient extends EventListener implements Buyer, Seller {
         MainServer.getInstance().subscribeToEvents(filter, this);
     }
 
-    public void subscribeToOwnEvent(ItemFilter filter) {
-        MainServer.getInstance().subscribeToOwnEvent(filter, this);
+    public void subscribeToReadEvents(ItemFilter filter) {
+        MainServer.getInstance().subscribeToReadEvents(filter, this);
     }
 
     private void generateInventory() {

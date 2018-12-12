@@ -56,11 +56,12 @@ public class MainServer {
     }
 
     //to see who reads the offers/demands they had posted
-    public void subscribeToOwnEvent(ItemFilter filter, MainClient client) {
+    public void subscribeToReadEvents(ItemFilter filter, MainClient client) {
         ListenerData listenerData = new ListenerData(client);
         listenerData.addFilter(filter);
 
         dispatcher.register(EventType.ITEM_READ, listenerData);
+        System.out.println("Client "+ client.getId() + " subscribed to read events.");
     }
 
     public void updateItem(Item oldItem, Item newItem){
@@ -103,6 +104,8 @@ public class MainServer {
 
     public Offer getOfferAtIntex(int i) {
         ArrayList<Offer> offers = new ArrayList<>(itemManager.getOffers());
+        if(i > offers.size())
+            return null;
         Offer offer = offers.get(i);
         publishEvent(new Event(EventType.ITEM_READ, offer));
         return offer;
