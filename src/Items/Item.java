@@ -1,13 +1,13 @@
 package Items;
 
-import Users.Client;
+import Users.MainClient;
 
 import java.util.Date;
 import java.util.LinkedList;
 
 public abstract class Item {
     private int totalViewers;
-    private LinkedList<Client> viewers;
+    private LinkedList<MainClient> viewers;
 
     private int price;
     private final Share shareType;

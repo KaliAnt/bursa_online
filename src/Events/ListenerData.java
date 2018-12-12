@@ -2,28 +2,35 @@ package Events;
 
 import Filters.EventFilter;
 
+import java.util.ArrayList;
+
 public class ListenerData {
     private EventListener listener;
-    private EventFilter filter;
+    private ArrayList<EventFilter> filters;
 
     public ListenerData(EventListener listener) {
         this.listener = listener;
     }
 
     public void addFilter(EventFilter filter) {
-        this.filter = filter;
+        this.filters.add(filter);
     }
 
     public EventListener getListener() {
         return listener;
     }
 
-    public EventFilter getFilter() {
-        return filter;
+    public ArrayList getFilter() {
+        return filters;
     }
 
     public boolean applyFilter(Event e) {
-        return filter.applyFilter(e);
+        for (EventFilter filter:
+             filters) {
+            if (!filter.applyFilter(e))
+                return false;
+        }
+        return true;
     }
 
 
