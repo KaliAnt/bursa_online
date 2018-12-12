@@ -29,12 +29,13 @@ public class MainClient extends EventListener implements Buyer, Seller {
         this.id = String.valueOf(counter);
         this.shareInventory = new HashMap<>();
         this.walletBalance = 0;
+        generateInventory();
         System.out.println("Created Client: " + id);
     }
 
     @Override
     public void handleEvent(Event event) {
-        System.out.print("Event for Client " + id + event.getEventType());
+        System.out.println("Event for Client " + id + ": " + event.getEventType());
     }
 
     //SUBSCRIBE
@@ -85,18 +86,18 @@ public class MainClient extends EventListener implements Buyer, Seller {
     }
 
     //actions
-    public void proposeOffer(int price, Share shareType, int amount) {
-        Offer o = new Offer(this, price, shareType, amount);
+    public void proposeOffer(Offer offer) {
+        Offer o = offer;
         MainServer.getInstance().addItem(o);
         offers.add(o);
-        removeSharesFromInventory(shareType, amount); //remove the shares, since they are up for sale
+        removeSharesFromInventory(o.getShareType(), o.getAmount()); //remove the shares, since they are up for sale
     }
 
-    public void proposeDemand(int price, Share shareType, int amount) {
-        Demand d = new Demand(this, price, shareType, amount);
+    public void proposeDemand(Demand demand) {
+        Demand d = demand;
         MainServer.getInstance().addItem(d);
         demands.add(d);
-        decreaseWalletBalanceBy(price * amount);
+        decreaseWalletBalanceBy(demand.getPrice() * demand.getAmount());
     }
 
     public void buy(Offer o) {

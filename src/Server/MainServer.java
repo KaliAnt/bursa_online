@@ -91,10 +91,11 @@ public class MainServer {
         return offers;
     }
 
-    public ArrayList<Demand> getDemands() {
+    public ArrayList<Demand> getDemands(MainClient client) {
         ArrayList<Demand> demands = new ArrayList<Demand>(itemManager.getDemands());
         for (Demand demand:
                 demands) {
+            demand.readByClient(client);
             publishEvent(new Event(EventType.ITEM_READ, demand));
         }
         return demands;

@@ -10,6 +10,7 @@ public class ListenerData {
 
     public ListenerData(EventListener listener) {
         this.listener = listener;
+        filters = new ArrayList<>();
     }
 
     public void addFilter(EventFilter filter) {

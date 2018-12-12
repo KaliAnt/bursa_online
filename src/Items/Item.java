@@ -66,4 +66,13 @@ public abstract class Item {
         }
         return false;
     }
+
+    public void readByClient(MainClient client) {
+        viewers.add(client);
+        totalViewers++;
+    }
+
+    public int getTotalViewers() {
+        return totalViewers;
+    }
 }
